@@ -11,8 +11,6 @@ namespace TestTask
         }
         public void Execute(Chest[] chests)
         {
-            Console.WriteLine("Hello");
-            Console.WriteLine(chestNumber + "Chest number");
             chests[chestNumber-1].Open();
         }
     }

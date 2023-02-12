@@ -1,12 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TestTask
 {
-    public class Chest
+    public class Chest : ItemContainer
     {
         public void Open()
         {
-            Console.WriteLine("Chest opened");
+           ShowContainerData();
+        }
+
+        public override void ShowContainerData()
+        {
+            Console.WriteLine("Chest contains:");
+            base.ShowContainerData();
         }
     }
 }
