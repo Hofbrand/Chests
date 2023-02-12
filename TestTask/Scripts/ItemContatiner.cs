@@ -17,11 +17,15 @@ namespace TestTask
             items[Item.Ring] = 0;
         }
 
-        public void AddItem(Item itemType, int count)
+        public virtual void AddItem(Item itemType)
         {
             if (items.ContainsKey(itemType))
             {
-                items[itemType] += count;
+                items[itemType] ++;
+            }
+              else
+            {
+                items.Add(itemType, 1);
             }
         }
 

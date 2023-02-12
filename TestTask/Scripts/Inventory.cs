@@ -7,9 +7,8 @@ namespace TestTask
     {
         private static Inventory instance;
 
-        private Inventory()
-        {
-        }
+        public delegate void ItemsChangedEventHandler();
+        public event ItemsChangedEventHandler OnItemsChanged;
 
         public static Inventory Instance
         {
@@ -18,6 +17,7 @@ namespace TestTask
                 if (instance == null)
                 {
                     instance = new Inventory();
+
                 }
 
                 return instance;
@@ -28,6 +28,7 @@ namespace TestTask
         {
             Console.WriteLine("Inventory contains:");
             base.ShowContainerData();
+           
         }
     }
 
