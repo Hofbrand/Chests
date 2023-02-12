@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Data;
-using System.Diagnostics;
 
 namespace TestTask.Scripts
 {

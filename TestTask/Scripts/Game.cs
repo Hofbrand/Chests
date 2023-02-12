@@ -4,6 +4,7 @@ namespace TestTask
 {
     public class Game
     {
+
         static void Main(string[] args)
         {
             Inventory inventory = Inventory.Instance;
