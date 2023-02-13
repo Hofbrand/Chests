@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace TestTask
 {
@@ -17,56 +18,27 @@ namespace TestTask
 
         public void Execute()
         {
-            ChestChances chestChances = null;
-            switch (chestNumber)
-            {
-                case 1:
-                    chestChances = chestChancesData.Chest1;
-                    break;
-                case 2:
-                    chestChances = chestChancesData.Chest2;
-                    break;
-                case 3:
-                    chestChances = chestChancesData.Chest3;
-                    break;
-            }
+            ChestChances chestChances = chestChancesData.GetChestChances(chestNumber);
 
             if (chestChances == null)
             {
-                Console.WriteLine("Chest with number {0} doesn't exist", chestNumber);
+                Console.WriteLine($"Chest with number {chestNumber} doesn't exist");
                 return;
             }
-            var Random = new Random();
-            int randomNumber = Random.Next(1,100);
-            if (randomNumber <= chestChances.Sword)
-            {
-                inventory.AddItem(Item.Sword);
-            }
-            randomNumber = new Random().Next(1, 100);
 
-            if (randomNumber <= chestChances.Coins)
-            {
-                inventory.AddItem(Item.Coins);
-            }
-            randomNumber = new Random().Next(1, 100);
-            if (randomNumber <= chestChances.ManaPotion)
-            {
-                inventory.AddItem(Item.ManaPotion);
-            }
-            randomNumber = new Random().Next(1, 100);
+            var random = new Random();
+            foreach (Item item in Enum.GetValues(typeof(Item)).Cast<Item>())
+                AddItemIfChanceMet(random, chestChances.items[item], item);
 
-            if (randomNumber <= chestChances.HealPotion)
+            Console.WriteLine($"Chest number {chestNumber} is opened!");
+        }
+
+        private void AddItemIfChanceMet(Random random, int chance, Item item)
+        {
+            if (random.Next(1, 100) <= chance)
             {
-                inventory.AddItem(Item.HealPotion);
+                inventory.AddItem(item);
             }
-            randomNumber = new Random().Next(1, 100);
-            if (randomNumber <= chestChances.Ring)
-            {
-                inventory.AddItem(Item.Ring);
-            }
-            Console.WriteLine("Chest number {0} is opened!", chestNumber);
-         
         }
     }
-    
 }

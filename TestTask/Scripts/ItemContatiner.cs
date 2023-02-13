@@ -1,27 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TestTask
 {
-    public class ItemContainer
+    public abstract class ItemContainer
     {
-        protected Dictionary<Item, int> items;
-
-        public ItemContainer()
-        {
-            items = new Dictionary<Item, int>();
-            items[Item.Sword] = 0;
-            items[Item.Coins] = 0;
-            items[Item.ManaPotion] = 0;
-            items[Item.HealPotion] = 0;
-            items[Item.Ring] = 0;
-        }
+        public Dictionary<Item, int> items;
 
         public virtual void AddItem(Item itemType)
         {
             if (items.ContainsKey(itemType))
             {
-                items[itemType] ++;
+                items[itemType]++;
             }
               else
             {
@@ -47,13 +38,14 @@ namespace TestTask
             return 0;
         }
 
-        public virtual void ShowContainerData()
+        public Dictionary<Item, int> GetItemsDictionary()
         {
-            foreach (KeyValuePair<Item, int> item in items)
-            {
-                Console.WriteLine(item.Key + ": " + item.Value);
-            }
-            Console.WriteLine();
+            return items;
+        }
+
+        public void ShowContainerData(DisplayItems concreteDisplay)
+        {
+            concreteDisplay.Show(GetItemsDictionary());
         }
     }
 }

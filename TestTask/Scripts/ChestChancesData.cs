@@ -1,70 +1,76 @@
 ﻿
-
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using TestTask.Scripts;
+using System.Linq;
 
 namespace TestTask
 {
     public class ChestChancesData
     {
-        public ChestChances Chest1 { get; set; }
-        public ChestChances Chest2 { get; set; }
-        public ChestChances Chest3 { get; set; }
+        [JsonProperty("Chests")]
+        private List<ChestChances> Chests;
 
-        public static ChestChancesData GetChestChancesData(ChestCreationMethod method, PlayersInput input, JsonHandler jsonHandler)
+        public ChestChancesData GetChestChancesData(ChestGenerator chestGenerator, int chestsAmount)
         {
-            ChestChancesData chestChancesData = null;
-            switch (method)
+            return chestGenerator.Generate(chestsAmount);
+        }
+
+        public ChestChancesData(int chestsAmount)
+        {
+            CreateChestChancesData(chestsAmount);
+        }
+
+        public ChestChancesData() { }
+     
+        public ChestChancesData(List<ChestChances> data)
+        {
+            Chests?.Clear();
+            Chests = new List<ChestChances>();
+            for (int i = 0; i < data.Count; i++)
             {
-                case ChestCreationMethod.ConsoleInput:
-                    chestChancesData = input.GetChestChancesDataFromConsole();
-                    break;
-                case ChestCreationMethod.UseExistingJson:
-                    chestChancesData = jsonHandler.GetChestChancesData();
-                    break;
-                case ChestCreationMethod.WriteToJson:
-                    chestChancesData = new ChestChancesData(
-                        new ChestChances(10, 20, 30, 40, 50),
-                        new ChestChances(30, 20, 10, 40, 50),
-                        new ChestChances(50, 20, 30, 10, 40)
-                    );
-                    jsonHandler.SaveChestChancesData(chestChancesData);
-                    break;
+                Chests.Add(data[i]);
+            }
+        }
+
+        public ChestChancesData CreateChestChancesData(int chestsAmount)
+        {
+            ChestChancesData chestChancesData = new ChestChancesData
+            {
+                Chests = new List<ChestChances>(chestsAmount)
+            };
+            for (int i = 0; i < chestsAmount; i++)
+            {
+                chestChancesData.Chests.Add(new ChestChances());   
             }
             return chestChancesData;
         }
 
-        public ChestChancesData() { }
-
-        public ChestChancesData(ChestChances chest1, ChestChances chest2, ChestChances chest3)
+        public ChestChances GetChestChances(int chestNumber)
         {
-            Chest1 = chest1;
-            Chest2 = chest2;
-            Chest3 = chest3;
+            return Chests[chestNumber - 1];
         }
-
     }
 
     public class ChestChances
     {
-        public int Sword { get; set; }
-        public int Coins { get; set; }
-        public int ManaPotion { get; set; }
-        public int HealPotion { get; set; }
-        public int Ring { get; set; }
+        public Dictionary<Item, int> items;
 
         public ChestChances()
         {
+            items = new Dictionary<Item, int>();
+            foreach (var item in Enum.GetValues(typeof(Item)).Cast<Item>())
+            {
+                this.items[item] = 100;
+            }
         }
 
-        public ChestChances(int sword, int coins, int manaPotion, int healPotion, int ring)
+        public ChestChances(Dictionary<Item, int> items)
         {
-            Sword = sword;
-            Coins = coins;
-            ManaPotion = manaPotion;
-            HealPotion = healPotion;
-            Ring = ring;
+            foreach(var item in Enum.GetValues(typeof(Item)).Cast<Item>())
+            {
+                this.items[item] = items[item];
+            }
         }
     }
 }
