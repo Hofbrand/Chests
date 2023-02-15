@@ -14,7 +14,7 @@ namespace TestTask
             {
                 items[itemType]++;
             }
-              else
+            else
             {
                 items.Add(itemType, 1);
             }

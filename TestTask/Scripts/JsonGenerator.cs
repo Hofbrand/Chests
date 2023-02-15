@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+using System;
 using System.IO;
 
 namespace TestTask
 {
     public class JsonGenerator : ChestGenerator
     {
-        private readonly string path = "chestChancesData.json";
+        private readonly string path = FilePath.Path;
 
         public void SaveChestChancesData(ChestChancesData chestChancesData)
         {
@@ -19,6 +19,7 @@ namespace TestTask
         {
             if (!File.Exists(path))
             {
+                Console.WriteLine(Messages.FileNotFound);
                 SaveChestChancesData(new ChestChancesData().CreateChestChancesData(chestsAmount));
             }
 

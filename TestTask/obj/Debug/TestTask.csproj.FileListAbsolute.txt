@@ -17,3 +17,6 @@ C:\Users\user\Desktop\Repo\Chests\TestTask\obj\Debug\TestTask.pdb
 C:\Users\user\Desktop\Repo\Chests\TestTask\bin\Debug\Newtonsoft.Json.dll
 C:\Users\user\Desktop\Repo\Chests\TestTask\bin\Debug\Newtonsoft.Json.xml
 C:\Users\user\Desktop\Repo\Chests\TestTask\obj\Debug\TestTask.csproj.CopyComplete
+C:\Users\user\Desktop\Repo\Chests\TestTask\obj\Debug\TestTask.Messages.resources
+C:\Users\user\Desktop\Repo\Chests\TestTask\obj\Debug\TestTask.csproj.GenerateResource.cache
+C:\Users\user\Desktop\Repo\Chests\TestTask\obj\Debug\TestTask.FilePath.resources

@@ -24,15 +24,11 @@ namespace TestTask
         public Inventory()
         {
             items = new Dictionary<Item, int>();
+
             foreach (Item itemType in Enum.GetValues(typeof(Item)).Cast<Item>())
             {
                 items[itemType] = 0;
             }
         }
-    }
-
-    public enum Item
-    {
-        Sword
     }
 }

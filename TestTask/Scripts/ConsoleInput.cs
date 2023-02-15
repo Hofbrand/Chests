@@ -10,9 +10,9 @@ namespace TestTask
         public ChestCreationMethod GetChestCreationMethod()
         {
             {
-                Console.WriteLine("How do you want to create the chances for the chests?");
-                Console.WriteLine("1. Console Input");
-                Console.WriteLine("2. JSON Input");
+                Console.WriteLine(Messages.CreateMethod);
+                Console.WriteLine(Messages.ConsoleInput);
+                Console.WriteLine(Messages.JsonInput);
 
                 if (int.TryParse(Console.ReadLine(), out int choice))
                 {
@@ -23,13 +23,13 @@ namespace TestTask
                         case 2:
                             return ChestCreationMethod.JsonInput;
                         default:
-                            Console.WriteLine("Invalid choice, please try again");
+                            Console.WriteLine(Messages.InvalidInput);
                             return GetChestCreationMethod();
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid choice, please try again");
+                    Console.WriteLine(Messages.InvalidInput);
                     return GetChestCreationMethod();
                 }
 
@@ -39,7 +39,9 @@ namespace TestTask
         public int GetChestNumber(int chestsLength)
         {
 
-            Console.Write("Enter the number of the chest you want to open ( ");
+            Console.Write(Messages.OpenChest);
+            Console.Write(" ( ");
+
             for (int i = 1; i < chestsLength + 1; i++)
             {
                 Console.Write(i + " ");
@@ -49,13 +51,14 @@ namespace TestTask
             Console.WriteLine();
 
             var input = Console.ReadLine();
+
             if (int.TryParse(input, out int chestNumber) && chestNumber >= 1 && chestNumber <= chestsLength)
             {
                 return chestNumber;
             }
             else
             {
-                Console.WriteLine("Invalid input. Please try again.");
+                Console.WriteLine(Messages.InvalidInput);
                 return GetChestNumber(chestsLength);
             }
 
@@ -63,7 +66,7 @@ namespace TestTask
 
         public int GetChestLength()
         {
-            Console.WriteLine("Enter the number of chests you want to create ");
+            Console.WriteLine(Messages.CreateChest);
 
             var input = Console.ReadLine();
             if (int.TryParse(input, out int chestLength) && chestLength >= 1)
@@ -72,7 +75,7 @@ namespace TestTask
             }
             else
             {
-                Console.WriteLine("Invalid input. Please try again.");
+                Console.WriteLine(Messages.InvalidInput);
                 return GetChestLength();
             }
         }

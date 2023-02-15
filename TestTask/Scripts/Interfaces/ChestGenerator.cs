@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices.WindowsRuntime;
-
-namespace TestTask
+﻿namespace TestTask
 {
     public abstract class ChestGenerator
     {

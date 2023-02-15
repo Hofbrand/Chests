@@ -1,4 +1,6 @@
-﻿namespace TestTask
+﻿using System.Configuration;
+
+namespace TestTask
 {
     public class Game
     {
@@ -11,9 +13,8 @@
             var ChestChancesData = new ChestChancesData();
             ChestGenerator chestGenerator = null;
             ChestChancesData data = null;
-
-            int chestsAmount = input.GetChestLength();
-
+            int chestsAmount =  int.Parse(ConfigurationManager.AppSettings["NumberOfChests"]);
+          
             do
             {
                 chestGenerator = ChestGenerator.GetChestGenerator(input.GetChestCreationMethod());

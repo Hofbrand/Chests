@@ -22,7 +22,7 @@ namespace TestTask
 
             if (chestChances == null)
             {
-                Console.WriteLine($"Chest with number {chestNumber} doesn't exist");
+                Console.WriteLine($"{Messages.ChestWithNumber} {chestNumber} {Messages.DoesntExist}");
                 return;
             }
 
@@ -30,7 +30,7 @@ namespace TestTask
             foreach (Item item in Enum.GetValues(typeof(Item)).Cast<Item>())
                 AddItemIfChanceMet(random, chestChances.items[item], item);
 
-            Console.WriteLine($"Chest number {chestNumber} is opened!");
+            Console.WriteLine($"{Messages.Chest} {chestNumber} {Messages.IsOpened}");
         }
 
         private void AddItemIfChanceMet(Random random, int chance, Item item)

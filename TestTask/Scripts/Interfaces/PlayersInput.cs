@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TestTask
+﻿namespace TestTask
 {
     public interface PlayersInput
     {

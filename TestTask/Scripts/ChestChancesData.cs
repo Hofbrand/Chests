@@ -1,5 +1,4 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +9,7 @@ namespace TestTask
     {
         [JsonProperty("Chests")]
         private List<ChestChances> Chests;
+        public ChestChancesData() { }
 
         public ChestChancesData GetChestChancesData(ChestGenerator chestGenerator, int chestsAmount)
         {
@@ -20,13 +20,12 @@ namespace TestTask
         {
             CreateChestChancesData(chestsAmount);
         }
-
-        public ChestChancesData() { }
      
         public ChestChancesData(List<ChestChances> data)
         {
             Chests?.Clear();
             Chests = new List<ChestChances>();
+
             for (int i = 0; i < data.Count; i++)
             {
                 Chests.Add(data[i]);
@@ -39,10 +38,12 @@ namespace TestTask
             {
                 Chests = new List<ChestChances>(chestsAmount)
             };
+
             for (int i = 0; i < chestsAmount; i++)
             {
                 chestChancesData.Chests.Add(new ChestChances());   
             }
+
             return chestChancesData;
         }
 
@@ -59,6 +60,7 @@ namespace TestTask
         public ChestChances()
         {
             items = new Dictionary<Item, int>();
+
             foreach (var item in Enum.GetValues(typeof(Item)).Cast<Item>())
             {
                 this.items[item] = 100;
